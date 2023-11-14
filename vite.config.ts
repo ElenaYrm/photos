@@ -4,7 +4,7 @@ import checker from 'vite-plugin-checker';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/test-photos/',
+  // base: '/test-photos/',
   plugins: [
     react(),
     checker({
