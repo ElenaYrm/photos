@@ -1,0 +1,23 @@
+$background-color: #ffffff;
+$text-color: #000000;
+
+$font-weight-map: (
+  'regular': 400,
+  'semibold': 600,
+  'bold': 700,
+);
+
+$title1: 4rem, 100%;
+$title2: 3rem, 100%;
+$title3: 2rem, 100%;
+
+$text1: 1.8rem, 2rem;
+$text2: 1.6rem, 100%;
+
+$font-type-map: (
+  'h1':$title1,
+  'h2':$title2,
+  'h3':$title3,
+  'p1':$text1,
+  'p2':$text2,
+);

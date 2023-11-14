@@ -1,0 +1,10 @@
+@use "variables";
+
+@mixin font($weight: regular, $type, $color: var(--text)) {
+  $font-type: map-get(variables.$font-type-map, $type);
+
+  font-weight: map-get(variables.$font-weight-map, $weight);
+  font-size: nth($font-type, 1);
+  line-height: nth($font-type, 2);
+  color: $color;
+}
