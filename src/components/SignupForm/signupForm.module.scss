@@ -1,0 +1,14 @@
+@import "src/styles/common";
+
+.signup {
+  margin: 0 auto;
+  width: 35rem;
+
+  &__wrapper {
+    text-align: right;
+  }
+
+  &__btn {
+    @include button();
+  }
+}
