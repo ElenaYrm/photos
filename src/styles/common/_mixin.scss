@@ -15,4 +15,9 @@
   background-color: variables.$primary-color;
   @include font(semibold, p2, variables.$background-color);
   border-radius: 0.7rem;
+  transition: opacity 0.2s ease-in-out;
+
+  &:disabled {
+    opacity: 0.5;
+  }
 }

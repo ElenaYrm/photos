@@ -1,11 +1,13 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { Form, Formik } from 'formik';
 import { initialLoginForm } from '../../constant/initialForm.ts';
 import { useLoginMutation } from '../../services/store/auth/api';
 import { useAppDispatch } from '../../services/store';
-import { login } from '../../services/store/auth/slice';
-import { ILoginForm } from '../../types/interfaces.ts';
+import { setError } from '../../services/store/auth/slice';
+import { IApiErrorResponse, ILoginForm } from '../../types/interfaces.ts';
+import { isErrorWithMessage, isFetchBaseQueryError } from '../../types/guards.ts';
 import { loginValidationSchema } from '../../utils';
+import { useLoginResult } from '../../hooks/useLoginResult.ts';
 import { PasswordInput } from '../shared/PasswordInput';
 import { Input } from '../shared/Input/Input.tsx';
 
@@ -14,12 +16,7 @@ import styles from './loginForm.module.scss';
 export const LoginForm: FC = () => {
   const [loginApi, { data, isSuccess }] = useLoginMutation();
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (data) {
-      dispatch(login(data.accessToken));
-    }
-  }, [isSuccess, dispatch]);
+  useLoginResult(data, isSuccess);
 
   async function handleSubmit(form: ILoginForm): Promise<void> {
     const userData = {
@@ -27,7 +24,15 @@ export const LoginForm: FC = () => {
       password: form.password,
     };
 
-    await loginApi(userData).unwrap();
+    try {
+      await loginApi(userData).unwrap();
+    } catch (error) {
+      if (isFetchBaseQueryError(error)) {
+        dispatch(setError((error.data as IApiErrorResponse).message));
+      } else if (isErrorWithMessage(error)) {
+        dispatch(setError(error.message));
+      }
+    }
   }
 
   return (

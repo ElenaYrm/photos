@@ -3,6 +3,7 @@ import { IAuthSlice } from '../types';
 
 const initialAuthSlice: IAuthSlice = {
   isAuthorized: !!localStorage.getItem('photos-token'),
+  error: '',
 };
 
 const authSlice = createSlice({
@@ -15,8 +16,14 @@ const authSlice = createSlice({
     logout: (state): void => {
       state.isAuthorized = false;
     },
+    setError: (state, action: PayloadAction<string>): void => {
+      state.error = action.payload;
+    },
+    resetError: (state): void => {
+      state.error = '';
+    },
   },
 });
 
 export const authReducer = authSlice.reducer;
-export const { login, logout } = authSlice.actions;
+export const { login, logout, setError, resetError } = authSlice.actions;

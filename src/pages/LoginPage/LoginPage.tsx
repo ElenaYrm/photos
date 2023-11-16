@@ -1,11 +1,12 @@
 import { FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectIsAuthorized } from '../../services/store/auth/selectors';
+import { selectAuthError, selectIsAuthorized } from '../../services/store/auth/selectors';
 import { PATH } from '../../services/router/constants/paths.ts';
 import { Page } from '../../services/router/types';
 import { LoginForm } from '../../components/LoginForm';
 import { SignupForm } from '../../components/SignupForm';
+import { ErrorMessage } from '../../components/shared/ErrorMessage';
 
 import styles from './loginPage.module.scss';
 
@@ -13,6 +14,7 @@ export const LoginPage: FC = () => {
   const [isNewUser, setIsNewUser] = useState(false);
   const navigate = useNavigate();
   const isAuthorized = useSelector(selectIsAuthorized);
+  const error = useSelector(selectAuthError);
 
   useEffect(() => {
     if (isAuthorized) {
@@ -35,6 +37,7 @@ export const LoginPage: FC = () => {
             Sign up
           </button>
         </div>
+        {error && <ErrorMessage text={error} />}
         {isNewUser ? <SignupForm /> : <LoginForm />}
       </div>
     </section>

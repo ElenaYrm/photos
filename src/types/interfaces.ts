@@ -17,3 +17,8 @@ export interface IAuthResponse {
     createdAt: string;
   };
 }
+
+export interface IApiErrorResponse {
+  message: string;
+  errors: { [k: string]: string[] };
+}
