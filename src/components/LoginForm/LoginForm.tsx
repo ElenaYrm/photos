@@ -1,6 +1,9 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Form, Formik } from 'formik';
 import { initialLoginForm } from '../../constant/initialForm.ts';
+import { useLoginMutation } from '../../services/store/auth/api';
+import { useAppDispatch } from '../../services/store';
+import { login } from '../../services/store/auth/slice';
 import { ILoginForm } from '../../types/interfaces.ts';
 import { loginValidationSchema } from '../../utils';
 import { PasswordInput } from '../shared/PasswordInput';
@@ -9,13 +12,22 @@ import { Input } from '../shared/Input/Input.tsx';
 import styles from './loginForm.module.scss';
 
 export const LoginForm: FC = () => {
-  function handleSubmit(form: ILoginForm): void {
+  const [loginApi, { data, isSuccess }] = useLoginMutation();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (data) {
+      dispatch(login(data.accessToken));
+    }
+  }, [isSuccess, dispatch]);
+
+  async function handleSubmit(form: ILoginForm): Promise<void> {
     const userData = {
       email: form.email,
       password: form.password,
     };
 
-    console.log(userData);
+    await loginApi(userData).unwrap();
   }
 
   return (

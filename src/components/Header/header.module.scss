@@ -1,0 +1,23 @@
+@import "src/styles/common";
+
+.header {
+  padding: 2rem 0;
+  background-color: $header-color;
+
+  &__logo {
+    margin: 0;
+    @include font(bold, h1, $primary-color);
+  }
+
+  &__container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__btn {
+    @include font(regular, p3, $text-color);
+    text-decoration: underline;
+  }
+}

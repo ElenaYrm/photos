@@ -1,22 +1,34 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Form, Formik } from 'formik';
 import { ISignupForm } from '../../types/interfaces.ts';
 import { initialSignupForm } from '../../constant/initialForm.ts';
 import { signupValidationSchema } from '../../utils';
+import { useAppDispatch } from '../../services/store';
+import { login } from '../../services/store/auth/slice';
+import { useSignupMutation } from '../../services/store/auth/api';
 import { Input } from '../shared/Input/Input.tsx';
 import { PasswordInput } from '../shared/PasswordInput';
 
 import styles from './signupForm.module.scss';
 
 export const SignupForm: FC = () => {
-  function handleSubmit(form: ISignupForm): void {
+  const [signupApi, { data, isSuccess }] = useSignupMutation();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (data) {
+      dispatch(login(data.accessToken));
+    }
+  }, [isSuccess, dispatch]);
+
+  async function handleSubmit(form: ISignupForm): Promise<void> {
     const userData = {
       email: form.email,
       password: form.password,
-      user_name: form.username,
+      username: form.username,
     };
 
-    console.log(userData);
+    await signupApi(userData).unwrap();
   }
 
   return (

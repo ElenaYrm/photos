@@ -1,5 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectIsAuthorized } from '../../services/store/auth/selectors';
 import { PATH } from '../../services/router/constants/paths.ts';
 import { Page } from '../../services/router/types';
 import { LoginForm } from '../../components/LoginForm';
@@ -10,7 +12,7 @@ import styles from './loginPage.module.scss';
 export const LoginPage: FC = () => {
   const [isNewUser, setIsNewUser] = useState(false);
   const navigate = useNavigate();
-  const isAuthorized = false;
+  const isAuthorized = useSelector(selectIsAuthorized);
 
   useEffect(() => {
     if (isAuthorized) {
