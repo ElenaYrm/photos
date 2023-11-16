@@ -12,7 +12,7 @@ export const HomePage: FC = () => {
     <section className={styles.home}>
       <div className="container">
         {isLoading && <Loader />}
-        {data && <Photos photos={data.photos} />}
+        {data && <Photos photos={data} />}
       </div>
     </section>
   );

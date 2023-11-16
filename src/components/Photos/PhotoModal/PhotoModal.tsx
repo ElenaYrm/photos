@@ -1,28 +1,26 @@
 import { FC, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { IPhoto } from '../../../types/interfaces.ts';
+import { useGetAllCommentsToPhotoQuery } from '../../../services/store/comments/api';
+import { Loader } from '../../shared/Loader';
+import { PhotoComments } from '../PhotoComments';
 
 import styles from './photoModal.module.scss';
 
 interface PhotoModalProps extends IPhoto {
-  isOpen: boolean;
   onClose: () => void;
 }
 
-export const PhotoModal: FC<PhotoModalProps> = ({ isOpen, onClose, id, url }) => {
+export const PhotoModal: FC<PhotoModalProps> = ({ onClose, id, url }) => {
+  const { data, isLoading } = useGetAllCommentsToPhotoQuery(id);
+
   useEffect(() => {
-    if (isOpen) {
-      document.body.classList.add('stop-scroll');
-    }
+    document.body.classList.add('stop-scroll');
 
     return () => {
       document.body.classList.remove('stop-scroll');
     };
   }, []);
-
-  if (!isOpen) {
-    return null;
-  }
 
   const parent: HTMLElement | null = document.getElementById('modal');
   if (!parent) return null;
@@ -35,6 +33,9 @@ export const PhotoModal: FC<PhotoModalProps> = ({ isOpen, onClose, id, url }) =>
           Close
         </button>
         <img src={url} alt={`Photo${id}`} className={styles.modal__img} />
+
+        {isLoading && <Loader />}
+        {data && <PhotoComments comments={data} photoId={id} />}
       </div>
     </>,
     parent,

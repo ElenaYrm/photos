@@ -17,7 +17,7 @@ export const PhotoCard: FC<IPhoto> = ({ id, url }) => {
         <button type="button" className={styles.photos__btn} onClick={handleClick}>
           <img src={url} alt={`Photo${id}`} className={styles.photos__img} />
         </button>
-        <PhotoModal isOpen={isOpenModal} onClose={handleClick} id={id} url={url} />
+        {isOpenModal && <PhotoModal onClose={handleClick} id={id} url={url} />}
       </li>
     </>
   );

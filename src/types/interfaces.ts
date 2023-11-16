@@ -27,3 +27,13 @@ export interface IPhoto {
   id: number;
   url: string;
 }
+
+export interface IComment {
+  id: number;
+  text: string;
+  userId: number;
+  photoId: number;
+  username: string;
+}
+
+export interface INewComment extends Omit<IComment, 'id' | 'username'> {}
