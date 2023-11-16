@@ -22,3 +22,8 @@ export interface IApiErrorResponse {
   message: string;
   errors: { [k: string]: string[] };
 }
+
+export interface IPhoto {
+  id: number;
+  url: string;
+}

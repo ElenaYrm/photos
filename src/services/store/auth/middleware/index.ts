@@ -1,7 +1,7 @@
 import { login, logout } from '../slice';
 import { Action, Middleware } from '@reduxjs/toolkit';
 
-export const authMiddleware: Middleware = (_) => (next) => (action: Action<string>) => {
+export const storageMiddleware: Middleware = (_) => (next) => (action: Action<string>) => {
   if (login.match(action)) {
     localStorage.setItem('photos-token', action.payload);
   } else if (logout.match(action)) {
