@@ -13,16 +13,22 @@
     justify-content: space-between;
   }
 
-  &__name {
-
-  }
-
   &__input {
     min-width: 25rem;
     padding-right: 3.2rem;
     @include font(regular, p2, $text-color);
     border: none;
     border-bottom: 0.1rem solid $text-color;
+    transition: border-bottom-color 0.2s ease-in-out, color 0.2s ease-in-out;
+
+    &:focus-visible,
+    &:active {
+      border-bottom-color: $secondary-color;
+    }
+
+    &:hover {
+      color: $secondary-color;
+    }
   }
 
   &__error {

@@ -1,3 +1,5 @@
+@import "src/styles/common";
+
 .auth {
   padding: 5rem 0;
 
@@ -11,8 +13,26 @@
   }
 
   &__btn {
+    @include font(regular, h2, $primary-color);
+    text-decoration: underline;
+    transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+
+    &:focus-visible {
+      @include focus-outline();
+    }
+
+    &:hover {
+      color: $secondary-color;
+    }
+
+    &:active {
+      color: $primary-color;
+      opacity: 0.7;
+    }
 
     &:disabled {
+      color: $primary-color;
+      opacity: 0.5;
       cursor: auto;
     }
   }

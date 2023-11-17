@@ -15,7 +15,7 @@ export const Input: FC<InputProps> = (props) => {
   return (
     <div className={styles.field}>
       <label className={styles.field__label}>
-        <span className={styles.field__name}>{title}</span>
+        <span>{title}</span>
         <Field type={type || 'text'} className={styles.field__input} {...restProps} />
       </label>
       {isTouched && error && <span className={styles.field__error}>{error}</span>}

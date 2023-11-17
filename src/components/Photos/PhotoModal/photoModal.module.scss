@@ -23,12 +23,35 @@
     padding: 2rem;
     overflow-y: auto;
     background-color: $background-color;
+
+    @media all and (max-width: 768px) {
+      width: 100%;
+      height: 100%;
+    }
   }
 
   &__btn {
     position: absolute;
-    right: 2rem;
-    top: 2rem;
+    right: 3rem;
+    top: 3rem;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    background-color: $header-color;
+    color: $primary-color;
+    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+
+    &:focus-visible {
+      @include focus-outline();
+    }
+
+    &:hover {
+      color: $secondary-color;
+    }
+
+    &:active {
+      color: $text-color;
+      background-color: $secondary-color;
+    }
   }
 
   &__img {
@@ -36,6 +59,14 @@
     width: 100%;
     height: 50rem;
     object-fit: cover;
+
+    @media all and (max-width: 1240px) {
+      height: 35rem;
+    }
+
+    @media all and (max-width: 768px) {
+      height: 25rem;
+    }
   }
 }
 

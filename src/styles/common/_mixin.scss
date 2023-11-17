@@ -9,15 +9,37 @@
   color: $color;
 }
 
+@mixin focus-outline() {
+  outline: 0.1rem solid variables.$secondary-color;
+  outline-offset: 0.2rem;
+}
+
 @mixin button() {
   padding: 1rem 2rem;
   text-align: center;
   background-color: variables.$primary-color;
   @include font(semibold, p2, variables.$background-color);
   border-radius: 0.7rem;
-  transition: opacity 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out, background-color 0.2s ease-in-out;
+
+  &:focus-visible {
+    @include focus-outline();
+  }
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &:active {
+    background-color: variables.$secondary-color;
+  }
 
   &:disabled {
+    cursor: auto;
     opacity: 0.5;
+
+    &:active {
+      background-color: variables.$primary-color;
+    }
   }
 }

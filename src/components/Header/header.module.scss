@@ -3,6 +3,7 @@
 .header {
   padding: 2rem 0;
   background-color: $header-color;
+  box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;
 
   &__logo {
     margin: 0;
@@ -17,7 +18,21 @@
   }
 
   &__btn {
-    @include font(regular, p3, $text-color);
+    @include font(regular, p3, $primary-color);
     text-decoration: underline;
+    transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+
+    &:focus-visible {
+      @include focus-outline();
+    }
+
+    &:hover {
+      color: $secondary-color;
+    }
+
+    &:active {
+      color: $primary-color;
+      opacity: 0.7;
+    }
   }
 }

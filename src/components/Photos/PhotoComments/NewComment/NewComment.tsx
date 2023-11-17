@@ -40,7 +40,7 @@ export const NewComment: FC<{ photoId: number }> = ({ photoId }) => {
           onChange={(event: ChangeEvent<HTMLTextAreaElement>) => setNewComment(event.target.value)}
           className={styles.comments__input}
         />
-        <button type="button" onClick={handleClick} className={styles.comments__btn}>
+        <button type="button" onClick={handleClick} className={styles.comments__btn} disabled={newComment.length === 0}>
           Add comment
         </button>
       </div>

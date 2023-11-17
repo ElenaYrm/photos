@@ -7,6 +7,14 @@
   grid-auto-rows: 20rem;
   gap: 2rem;
 
+  @media all and (max-width: 1240px){
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media all and (max-width: 768px){
+    grid-template-columns: 1fr;
+  }
+
   &__message {
     width: 100%;
     @include font(semibold, h2, $primary-color);
