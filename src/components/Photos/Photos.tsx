@@ -10,7 +10,7 @@ export const Photos: FC<{ photos: IPhoto[] }> = ({ photos }) => {
       {photos.length > 0 ? (
         <ul className={styles.photos}>{photos && photos.map((item) => <PhotoCard key={item.id} {...item} />)}</ul>
       ) : (
-        <div>There are no photos</div>
+        <div className={styles.photos__message}>There are no photos</div>
       )}
     </>
   );

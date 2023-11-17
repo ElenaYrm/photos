@@ -4,6 +4,7 @@ import { selectUserInfo } from '../../../services/store/auth/selectors';
 import { IComment, INewComment } from '../../../types/interfaces.ts';
 import { useAddCommentsMutation } from '../../../services/store/comments/api';
 import { CommentCard } from './CommentCard';
+import { ErrorMessage } from '../../shared/ErrorMessage';
 
 import styles from './photoComments.module.scss';
 
@@ -14,6 +15,7 @@ interface PhotoCommentsProps {
 
 export const PhotoComments: FC<PhotoCommentsProps> = ({ comments, photoId }) => {
   const [newComment, setNewComment] = useState('');
+  const [error, setError] = useState('');
   const [addComment] = useAddCommentsMutation();
   const { id: currentUser } = useSelector(selectUserInfo);
 
@@ -29,7 +31,7 @@ export const PhotoComments: FC<PhotoCommentsProps> = ({ comments, photoId }) => 
         await addComment(comment).unwrap();
         setNewComment('');
       } catch (error) {
-        console.log(error);
+        setError('Something was wrong. Please, try later');
       }
     }
   }
@@ -43,8 +45,9 @@ export const PhotoComments: FC<PhotoCommentsProps> = ({ comments, photoId }) => 
           ))}
         </ul>
       ) : (
-        <div>There are no comments</div>
+        <div className={styles.comments__message}>There are no comments</div>
       )}
+      {error && <ErrorMessage text={error} />}
       <div className={styles.comments__wrapper}>
         <textarea
           rows={3}

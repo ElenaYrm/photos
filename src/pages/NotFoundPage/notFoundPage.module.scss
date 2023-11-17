@@ -1,0 +1,11 @@
+@import "src/styles/common";
+
+.error {
+  padding: 5rem;
+
+  &__message {
+    width: 100%;
+    @include font(bold, h1, $primary-color);
+    text-align: center;
+  }
+}
