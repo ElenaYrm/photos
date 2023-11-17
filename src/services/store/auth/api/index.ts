@@ -1,9 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { IAuthResponse, ILoginForm, ISignupForm } from '../../../../types/interfaces.ts';
+import { VITE_CTP_API_URL } from '../../../../constant/metaData.ts';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api/' }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: VITE_CTP_API_URL,
+    credentials: 'include',
+  }),
   endpoints: (builder) => ({
     signup: builder.mutation<IAuthResponse, ISignupForm>({
       query: (body: ISignupForm) => {
@@ -31,7 +35,15 @@ export const authApi = createApi({
         };
       },
     }),
+    refresh: builder.query<IAuthResponse, void>({
+      query: () => {
+        return {
+          url: 'auth/refresh',
+          method: 'get',
+        };
+      },
+    }),
   }),
 });
 
-export const { useSignupMutation, useLoginMutation, useLogoutMutation } = authApi;
+export const { useSignupMutation, useLoginMutation, useLogoutMutation, useLazyRefreshQuery } = authApi;

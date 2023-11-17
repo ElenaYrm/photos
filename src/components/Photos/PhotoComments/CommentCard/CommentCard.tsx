@@ -1,4 +1,6 @@
 import { FC } from 'react';
+import { useSelector } from 'react-redux';
+import { selectUserInfo } from '../../../../services/store/auth/selectors';
 import { IComment } from '../../../../types/interfaces.ts';
 import { useDeleteCommentMutation } from '../../../../services/store/comments/api';
 
@@ -6,7 +8,7 @@ import styles from './commentCard.module.scss';
 
 export const CommentCard: FC<IComment> = ({ text, id, username, userId }) => {
   const [deleteComment] = useDeleteCommentMutation();
-  const currentUser = 1;
+  const { id: currentUser } = useSelector(selectUserInfo);
 
   async function handleClick(): Promise<void> {
     try {

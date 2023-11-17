@@ -7,15 +7,15 @@ export interface ISignupForm extends ILoginForm {
   username: string;
 }
 
+export interface IUserData {
+  id: number;
+  email: string;
+  username: string;
+}
+
 export interface IAuthResponse {
   accessToken: string;
-  user: {
-    id: number;
-    email: string;
-    username: string;
-    updatedAt: string;
-    createdAt: string;
-  };
+  user: IUserData;
 }
 
 export interface IApiErrorResponse {

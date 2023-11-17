@@ -1,4 +1,6 @@
 import { ChangeEvent, FC, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectUserInfo } from '../../../services/store/auth/selectors';
 import { IComment, INewComment } from '../../../types/interfaces.ts';
 import { useAddCommentsMutation } from '../../../services/store/comments/api';
 import { CommentCard } from './CommentCard';
@@ -13,7 +15,7 @@ interface PhotoCommentsProps {
 export const PhotoComments: FC<PhotoCommentsProps> = ({ comments, photoId }) => {
   const [newComment, setNewComment] = useState('');
   const [addComment] = useAddCommentsMutation();
-  const currentUser = 1;
+  const { id: currentUser } = useSelector(selectUserInfo);
 
   async function handleClick(): Promise<void> {
     if (newComment) {

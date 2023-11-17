@@ -1,10 +1,10 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { baseQueryWithHeaders } from '../../baseQueryWithHeaders.ts';
 import { IPhoto } from '../../../../types/interfaces.ts';
+import { baseQueryWithRefresh } from '../../auth/api/baseQueryWithRefresh.ts';
 
 export const photoApi = createApi({
   reducerPath: 'photoApi',
-  baseQuery: baseQueryWithHeaders,
+  baseQuery: baseQueryWithRefresh,
   endpoints: (builder) => ({
     getAllPhotos: builder.query<IPhoto[], void>({
       query: () => ({

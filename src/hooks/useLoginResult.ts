@@ -8,7 +8,7 @@ export const useLoginResult = (data: IAuthResponse | undefined, isSuccess: boole
 
   useEffect(() => {
     if (data) {
-      dispatch(login(data.accessToken));
+      dispatch(login(data));
     }
   }, [isSuccess, dispatch]);
 

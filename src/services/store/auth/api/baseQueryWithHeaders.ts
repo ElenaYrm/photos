@@ -1,7 +1,8 @@
 import { fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { VITE_CTP_API_URL } from '../../../../constant/metaData.ts';
 
 export const baseQueryWithHeaders = fetchBaseQuery({
-  baseUrl: 'http://localhost:3000/api/',
+  baseUrl: VITE_CTP_API_URL,
   prepareHeaders: (headers) => {
     const token = localStorage.getItem('photos-token');
     if (token) {
@@ -10,4 +11,5 @@ export const baseQueryWithHeaders = fetchBaseQuery({
 
     return headers;
   },
+  credentials: 'include',
 });

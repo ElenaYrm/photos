@@ -1,11 +1,12 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { baseQueryWithHeaders } from '../../baseQueryWithHeaders.ts';
 import { IComment, INewComment } from '../../../../types/interfaces.ts';
+import { baseQueryWithRefresh } from '../../auth/api/baseQueryWithRefresh.ts';
 
 export const commentsApi = createApi({
   reducerPath: 'commentsApi',
   tagTypes: ['Comments'],
-  baseQuery: baseQueryWithHeaders,
+  baseQuery: baseQueryWithRefresh,
+  refetchOnMountOrArgChange: true,
   endpoints: (builder) => ({
     getAllCommentsToPhoto: builder.query<IComment[], number>({
       query: (photoId) => ({
